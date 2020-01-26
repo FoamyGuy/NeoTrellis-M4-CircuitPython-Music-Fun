@@ -1,4 +1,4 @@
-##NeoTrellis M4 Circuit Python Music Fun
+## NeoTrellis M4 Circuit Python Music Fun
 **Requires: [adafruit_neotrellism4](https://github.com/adafruit/Adafruit_CircuitPython_TrellisM4)**
 
 This project consists of two parts: 

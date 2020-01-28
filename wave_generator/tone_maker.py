@@ -53,6 +53,73 @@ def append_sinewave(
     return
 
 
+def append_squarewave(
+        freq=440.0,
+        duration_milliseconds=500,
+        volume=1.0):
+    """
+
+    """
+
+    global audio  # using global variables isn't cool.
+
+    num_samples = duration_milliseconds * (sample_rate / 1000.0)
+
+    for x in range(int(num_samples)):
+        sine_val = volume * math.sin(2 * math.pi * freq * (x / sample_rate))
+        if sine_val >= 0:
+            audio.append(volume * 1)
+        else:
+            audio.append(-volume * 1)
+
+    return
+
+
+def append_sawtoothwave(
+        freq=440.0,
+        duration_milliseconds=500,
+        volume=1.0):
+    """
+
+    """
+
+    global audio  # using global variables isn't cool.
+
+    num_samples = duration_milliseconds * (sample_rate / 1000.0)
+
+    for x in range(int(num_samples)):
+        #sawtooth:
+        P = 1 / freq
+        sawtooth_val = volume * ((2/(P/2)) * ((P/2) - abs((x / sample_rate) % (2*(P/2) - P/2)))-1)
+        audio.append(sawtooth_val)
+    return
+
+
+def append_trianglewave(
+        freq=440.0,
+        duration_milliseconds=500,
+        volume=1.0):
+    """
+
+    """
+
+    global audio  # using global variables isn't cool.
+
+    num_samples = duration_milliseconds * (sample_rate / 1000.0)
+
+    for x in range(int(num_samples)):
+        #tri_val = volume * ((x/sample_rate) % 1/freq)
+        #tri_val = volume * (2 * abs(2*(((x/sample_rate)/(1/freq))-(((x/sample_rate)/(1/freq))+(1/2)))) - 1)
+        tri_val = volume * (2 * 1 / math.pi) * math.asin(math.sin(2 * (math.pi / (1/freq)) * (x/sample_rate)))
+
+        #sawtooth:
+        #P = 1 / freq
+        #tri_val = volume * ((2/(P/2)) * ((P/2) - abs((x / sample_rate) % (2*(P/2) - P/2)))-1)
+        audio.append(tri_val)
+
+    return
+
+
 def save_wav(file_name):
     # Open up a wav file
     wav_file = wave.open(file_name, "w")
@@ -84,7 +151,11 @@ def save_wav(file_name):
 
 
 for note in TONE_FREQ.keys():
-    append_sinewave(freq=TONE_FREQ[note], volume=0.01)
+    #append_sinewave(freq=TONE_FREQ[note], volume=0.01)
+    #append_squarewave(freq=TONE_FREQ[note], volume=0.01)
+    append_sawtoothwave(freq=TONE_FREQ[note], volume=0.01)
+    #append_trianglewave(freq=TONE_FREQ[note], volume=0.01)
+    print(audio)
     # append_silence(90)
     save_wav("%s.wav" % note)
     audio = []

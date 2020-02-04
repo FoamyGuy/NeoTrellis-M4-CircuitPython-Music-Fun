@@ -16,7 +16,8 @@ sample_rate = 8000.0 # 8k sample rate for "low quality".
 TONE_FREQ = {
     'C3': 131, 'D3': 147, 'E3': 165, 'F3': 175, 'G3': 196, 'A3': 220, 'B3': 247,
     'C4': 262, 'D4': 294, 'E4': 330, 'F4': 349, 'G4': 392, 'A4': 440, 'B4': 494,
-    'C5': 523, 'D5': 587, 'E5': 659, 'F5': 698, 'G5': 784, 'A5': 880, 'B5': 988
+    'C5': 523, 'D5': 587, 'E5': 659, 'F5': 698, 'G5': 784, 'A5': 880, 'B5': 988,
+    'Db3': 139, 'Eb3': 156, 'Gb3': 185, 'Db3': 208, 'Db3': 233,
 }
 
 
@@ -151,9 +152,9 @@ def save_wav(file_name):
 
 
 for note in TONE_FREQ.keys():
-    #append_sinewave(freq=TONE_FREQ[note], volume=0.01)
+    append_sinewave(freq=TONE_FREQ[note], volume=0.01)
     #append_squarewave(freq=TONE_FREQ[note], volume=0.01)
-    append_sawtoothwave(freq=TONE_FREQ[note], volume=0.01)
+    #append_sawtoothwave(freq=TONE_FREQ[note], volume=0.01)
     #append_trianglewave(freq=TONE_FREQ[note], volume=0.01)
     print(audio)
     # append_silence(90)
